@@ -580,7 +580,14 @@ void CDataFrame::Head(const uint count=5)
 //+------------------------------------------------------------------+
 bool CDataFrame::ToCSV(string csv_name, bool common=false, bool verbosity=false)
   {
-   FileDelete(csv_name);
+//   FileDelete(csv_name);
+  if(FileIsExist(csv_name)){
+       \\  PrintFormat("%s file exists!",csv_name);
+          FileDelete(csv_name);
+      }else{
+       \\  PrintFormat("%s file deleted!",csv_name);
+         
+     }
    int handle = FileOpen(csv_name,FILE_WRITE|FILE_SHARE_WRITE|FILE_CSV|FILE_ANSI|(common?FILE_COMMON:FILE_ANSI),",",CP_UTF8); //open a csv file
 
    if(handle == INVALID_HANDLE) //Check if the handle is OK
